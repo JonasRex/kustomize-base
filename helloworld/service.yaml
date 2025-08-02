@@ -1,10 +1,18 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: web-service
+  labels:
+    app.kubernetes.io/name: netic-hello-rest-api
+    app.kubernetes.io/version: 1.0.1
+    app.kubernetes.io/managed-by: quarkus
+  name: netic-hello-rest-api
 spec:
-  selector:
-    app: web
   ports:
   - name: http
     port: 80
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app.kubernetes.io/name: netic-hello-rest-api
+    app.kubernetes.io/version: 1.0.1
+  type: ClusterIP
